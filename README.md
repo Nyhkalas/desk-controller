@@ -1,0 +1,2 @@
+This is a project for both learning C++ and building a lifting desk controller using Mega 2560 now and then later adding ESP32.
+System is using PlatformIO in Visual Studio Code and megaatmega2560 environment.
