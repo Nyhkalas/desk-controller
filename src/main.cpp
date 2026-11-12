@@ -8,8 +8,7 @@ const int16_t HEIGHT_MAX_MM = 1200;
 const int16_t STEP_MM = 10;
 
 int16_t heightMm = 700;
-uint16_t comandCount = 0;
-uint32_t loopCount = 0;
+uint16_t commandCount = 0;
 
 int freeRam() {
   int top;
@@ -34,5 +33,6 @@ void setup() {
 }
 
 void loop() {
-  
+  static uint32_t loopCount = 0;
+  loopCount++;
 }
