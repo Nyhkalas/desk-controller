@@ -3,6 +3,14 @@
 extern int __heap_start;
 extern int *__brkval;
 
+const int16_t HEIGHT_MIN_MM = 650;
+const int16_t HEIGHT_MAX_MM = 1200;
+const int16_t STEP_MM = 10;
+
+int16_t heightMm = 700;
+uint16_t comandCount = 0;
+uint32_t loopCount = 0;
+
 int freeRam() {
   int top;
   int heapEnd = (__brkval == 0) ? (int)&__heap_start : (int)__brkval;
@@ -19,7 +27,10 @@ void setup() {
   Serial.println(F(__TIME__));
   Serial.print(F("Free SRAM: "));
   Serial.print(freeRam());
-  Serial.print(F(" bytes"));
+  Serial.println(F(" bytes"));
+  Serial.print(F("Height: "));
+  Serial.print(heightMm);
+  Serial.println(F(" mm"));
 }
 
 void loop() {
