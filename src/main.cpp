@@ -35,4 +35,47 @@ void setup() {
 void loop() {
   static uint32_t loopCount = 0;
   loopCount++;
+
+  if (Serial.available() > 0) {
+    char cmd = Serial.read();
+
+    switch (cmd) {
+      case 'u':
+        heightMm += STEP_MM;
+        if (heightMm > HEIGHT_MAX_MM) heightMm = HEIGHT_MAX_MM;
+        commandCount++;
+        Serial.print(F("Height: ")); Serial.print(heightMm); Serial.println(F(" mm"));
+        break;
+
+      case 'd':
+        heightMm -= STEP_MM;
+        if (heightMm < HEIGHT_MIN_MM) heightMm = HEIGHT_MIN_MM;
+        commandCount++;
+        Serial.print(F("Height: ")); Serial.print(heightMm); Serial.println(F(" mm"));
+        break;
+
+      case 's':
+        commandCount++;
+        Serial.print(F("Height: "));    Serial.print(heightMm);       Serial.println(F(" mm"));
+        Serial.print(F("Commands: "));  Serial.println(commandCount);
+        Serial.print(F("Loops: "));     Serial.println(loopCount);
+        Serial.print(F("Uptime: "));    Serial.print(millis());       Serial.println(F(" ms"));
+        Serial.print(F("Free SRAM: ")); Serial.print(freeRam());      Serial.println(F(" bytes"));
+        break;
+
+      case '?':
+        commandCount++;
+        Serial.println(F("u = up 10 mm, d = down 10 mm, s = status, ? = help"));
+        break;
+
+      case '\r':
+      case '\n':
+        break;
+
+      default:
+        Serial.print(F("Unknown command: "));
+        Serial.println(cmd);
+        break;
+    }
+  }
 }
